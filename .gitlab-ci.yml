@@ -28,7 +28,7 @@ job_deploy_staging:
   - dpl --provider=heroku --app=$HEROKU_STAGING_APP --api-key=$HEROKU_API_KEY
   only:
     variables:
-      - $STAGING_BRANCH
+      - $STAGING_BRANCH == $CI_COMMIT_REF_NAME
 
 job_deploy_production:
   stage: deploy_production
@@ -37,4 +37,4 @@ job_deploy_production:
   - dpl --provider=heroku --app=$HEROKU_PRODUCTION_APP --api-key=$HEROKU_API_KEY
   only:
     variables:
-      - $PRODUCTION_BRANCH
+      - $PRODUCTION_BRANCH == $CI_COMMIT_REF_NAME

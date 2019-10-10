@@ -23,7 +23,8 @@ job_build:
 job_deploy_staging:
   stage: deploy_staging
   script:
-  - gem install dpl
+  - gem install dpl -v 1.10.12
   - dpl --provider=heroku --app=$HEROKU_STAGING_APP --api-key=$HEROKU_STAGING_API_KEY
   only:
-  - staging
+    variables:
+      - $STAGING_BRANCH

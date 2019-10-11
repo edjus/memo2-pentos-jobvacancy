@@ -35,3 +35,15 @@ Feature: Job Offers CRUD
     And the title field value should be "Java dev"
     And the location field value should be "Buenos Aires"
     And the description field value should be "Full stack Java dev"
+
+  Scenario: Create from existing and confirm copied offer
+    Given an offer with title "Java dev", location "Buenos Aires" and description "Full stack Java dev" exists
+    And I access the my offers page
+    And I click copy for "Java dev"
+    And I set title to "Java dev Sr"
+    When confirm the new offer
+    Then I should see "Offer created"
+    And I should see "Java dev" in My Offers
+    And I should see "Java dev Sr" in My Offers
+    And the offer "Java dev Sr" should have "Buenos Aires"
+    And the offer "Java dev Sr" should have "Full stack Java dev"

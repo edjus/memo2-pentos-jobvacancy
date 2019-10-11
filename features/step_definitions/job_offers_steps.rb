@@ -86,3 +86,9 @@ Then('the description field value should be {string}') do |description|
   value = find_field('job_offer[description]').value
   expect(description).to eq(value)
 end
+
+When('the offer {string} should have {string}') do |title, value|
+  within('tr', text: title) do
+    page.should have_content(value)
+  end
+end

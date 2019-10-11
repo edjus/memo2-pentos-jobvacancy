@@ -56,3 +56,18 @@ end
 Given(/^I save the modification$/) do
   click_button('Save')
 end
+
+Given(/^I have an job offer titled "(.*?)", on "(.*?)" with description "(.*?)"$/) do |title, _location, _description|
+  visit '/job_offers/new'
+  fill_in('job_offer[title]', with: title)
+  click_button('Create')
+end
+
+When('I access "My Offers"') do
+  visit '/job_offers/my'
+end
+
+Then('the offer {string} has {int} applications') do |offer_title, q_applicants|
+  page.find('tr', text: offer_title).should have_content(offer_title)
+  page.find('tr', text: offer_title).should have_content(q_applicants)
+end

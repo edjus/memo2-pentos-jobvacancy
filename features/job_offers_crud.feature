@@ -26,3 +26,8 @@ Feature: Job Offers CRUD
     Given I delete it
     Then I should see "Offer deleted"
     And I should not see "Programmer vacancy!!!" in My Offers
+
+  Scenario: See job applications quantity
+    Given I have an job offer titled "Programador Java", on "Buenos Aires" with description "Full-stack Java Dev"
+    When I access "My Offers"
+    Then the offer "Programador Java" has 0 applications

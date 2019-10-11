@@ -16,3 +16,7 @@ end
 When('I click search') do
   click_button('search')
 end
+
+When('I click clear search') do
+  click_button('clear search')
+end

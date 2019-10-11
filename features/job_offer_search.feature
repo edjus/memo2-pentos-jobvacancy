@@ -11,8 +11,7 @@ Feature: Job Offer Search
     Then I should see "Java dev"
     And I should not see "Ruby dev"
 
-  @wip
-  Scenario: Clean search
+  Scenario: Clear search
     Given I access the offers list page
     And I fill the search bar with "Java"
     And I click search

@@ -33,7 +33,7 @@ JobVacancy::App.controllers :job_offers do
   end
 
   post :search do
-    @offers = JobOfferRepository.new.search_by_title(params[:q])
+    @offers = JobOfferRepository.new.search_by_title(params['search-input'])
     render 'job_offers/list'
   end
 

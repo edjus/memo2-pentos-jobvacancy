@@ -26,3 +26,13 @@ Feature: Job Offers CRUD
     Given I delete it
     Then I should see "Offer deleted"
     And I should not see "Programmer vacancy!!!" in My Offers
+
+  @wip
+  Scenario: Create from existing
+    Given an offer with title "Java dev", location "Buenos Aires" and description "Full stack Java dev" exists
+    And I access the new offer page
+    When I click copy for "Java dev"
+    Then I should be on the New Offer page
+    And the title field should contain "Java dev"
+    And the location field should contain "Buenos Aires"
+    And the description field should contain "Full stack Java dev"

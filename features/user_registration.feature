@@ -29,3 +29,14 @@ Feature: User registration
     When I confirm the registration
     Then I am still in Registration page
     And I should see "Sorry, passwords must have at least one Upper Case character"
+
+  @wip  
+  Scenario: Invalid registration, password without a special character
+    Given I am at registration page 
+    And I fill the name with "Rob"
+    And I fill the email with "rob@mail.com"
+    And I fill the password with "qwertyui"
+    And I fill the password confirmation with "qwertyuiL"
+    When I confirm the registration
+    Then I am still in Registration page
+    And I should see "Sorry, passwords must have at least one special character"

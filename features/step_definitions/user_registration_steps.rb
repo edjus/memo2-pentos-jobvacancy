@@ -1,4 +1,4 @@
-Given('I am at Registration page') do
+Given('I am at registration page') do
   visit '/register'
 end
 

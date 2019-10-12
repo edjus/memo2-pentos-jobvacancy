@@ -15,6 +15,6 @@ Feature: Job Offer Search
     Given I access the offers list page
     And I fill the search bar with "Java"
     And I click search
-    When I click clear search
+    When I click clear
     Then I should see "Java dev"
     And I should see "Ruby dev"

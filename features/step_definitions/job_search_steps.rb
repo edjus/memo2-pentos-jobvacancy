@@ -10,6 +10,6 @@ When('I click search') do
   click_button('search')
 end
 
-When('I click clear search') do
-  click_button('clear search')
+When('I click clear') do
+  click_button('clear')
 end

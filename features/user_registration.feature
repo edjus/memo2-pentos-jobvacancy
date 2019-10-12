@@ -20,7 +20,6 @@ Feature: User registration
     Then I am still in Registration page
     And I should see "Sorry, passwords must have at least 8 characters"
   
-  @wip
   Scenario: Invalid registration, password without an Upper Case character
     Given I am at registration page 
     And I fill the name with "Rob"

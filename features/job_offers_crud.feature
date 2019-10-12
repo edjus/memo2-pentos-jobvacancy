@@ -31,3 +31,4 @@ Feature: Job Offers CRUD
     Given I have an job offer titled "Programador Java", on "Buenos Aires" with description "Full-stack Java Dev"
     When I access "My Offers"
     Then the offer "Programador Java" has 0 applications
+

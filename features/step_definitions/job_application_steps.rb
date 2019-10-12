@@ -29,3 +29,10 @@ Then(/^I should receive a mail with offerer info$/) do
   content.include?(@job_offer.owner.email).should be true
   content.include?(@job_offer.owner.name).should be true
 end
+
+Given('job applicant named {string} applied for {string}') do |name, _job_title|
+  visit '/job_offers/latest'
+  click_link 'Apply'
+  fill_in('job_application[applicant_email]', with: name + '@test.com')
+  click_button('Apply')
+end

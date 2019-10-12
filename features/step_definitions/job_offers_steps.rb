@@ -65,9 +65,11 @@ end
 
 When('I access "My Offers"') do
   visit '/job_offers/my'
+  click_button('Activate')
 end
 
-Then('the offer {string} has {int} applications') do |offer_title, q_applicants|
-  page.find('tr', text: offer_title).should have_content(offer_title)
-  page.find('tr', text: offer_title).should have_content(q_applicants)
+Then('the offer {string} has {int} applications') do |title, q_applicants|
+  within('tr', text: title) do
+    page.should have_content(q_applicants)
+  end
 end

@@ -46,6 +46,13 @@ JobVacancy::App.controllers :job_offers do
     redirect '/job_offers'
   end
 
+  get :copy do
+    puts params
+    @job_offer = JobOfferRepository.new.find(params[:offer_id])
+
+    render 'job_offers/new'
+  end
+
   post :create do
     @job_offer = JobOffer.new(job_offer_params)
     @job_offer.owner = current_user

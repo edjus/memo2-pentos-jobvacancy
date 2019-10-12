@@ -56,7 +56,7 @@ describe User do
     end
   end
 
-  describe 'invalid password' do
+  describe 'password validation' do
     it 'raise error when password size is less than 8 characters' do
       expect do
         described_class.new(email: 'john.doe@someplace.com', password: 'got')
@@ -67,6 +67,12 @@ describe User do
       expect do
         described_class.new(email: 'john.doe@someplace.com', password: 'asdfghjkl')
       end.to raise_error 'passwords must have at least one Upper Case character'
+    end
+
+    it 'dont raise error when password have one upper case character' do
+      expect do
+        described_class.new(email: 'john.doe@someplace.com', password: 'asdfghjkL')
+      end.not_to raise_error 'passwords must have at least one Upper Case character'
     end
   end
 end

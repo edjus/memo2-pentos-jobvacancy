@@ -45,7 +45,7 @@ JobVacancy::App.mailer :notification do
     from 'Job Vacancy <no_reply@jobvacancy.com>'
     to job_application.applicant_email
     subject 'Job Application: Contact information'
-    locals job_offer: job_application.job_offer
+    locals application: job_application
     content_type :plain
     render 'notification/contant_info_email'
   end

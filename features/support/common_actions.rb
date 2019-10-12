@@ -7,4 +7,6 @@ def create_offer(title, location = 'a nice job', description = 'a nice job')
   job_offer.is_active = true
 
   JobOfferRepository.new.save job_offer
+
+  job_offer
 end

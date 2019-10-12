@@ -40,7 +40,7 @@ describe User do
   end
 
   describe 'has password?' do
-    let(:password) { 'pass.wordP' }
+    let(:password) { 'pass.word1P' }
     let(:user) do
       described_class.new(password: password,
                           email: 'john.doe@someplace.com',
@@ -91,6 +91,12 @@ describe User do
       expect do
         described_class.new(email: 'john.doe@someplace.com', password: 'asdf ghB.jkl')
       end.not_to raise_error 'passwords must have at least one special character'
+    end
+
+    it 'raise error when password does not have a number' do
+      expect do
+        described_class.new(email: 'john.doe@someplace.com', password: 'asdfgh/Bjkl')
+      end.to raise_error 'passwords must be alphanumeric'
     end
   end
 end

@@ -38,5 +38,6 @@ class User
     special_characters = " !\"#$%&'()*+,-./:;<=>?@[\]^_`{|}~"
     regex = /[#{special_characters.gsub(/./) { |char| "\\#{char}" }}]/
     raise 'passwords must have at least one special character' if password !~ regex
+    raise 'passwords must be alphanumeric' if password !~ /[0-9]/
   end
 end

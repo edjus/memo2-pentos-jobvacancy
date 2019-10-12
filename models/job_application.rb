@@ -9,6 +9,9 @@ class JobApplication
     app
   end
 
+  def applicant_curriculum
+  end
+
   def process
     JobVacancy::App.deliver(:notification, :contact_info_email, self)
   end

@@ -61,11 +61,11 @@ Given(/^I have an job offer titled "(.*?)", on "(.*?)" with description "(.*?)"$
   visit '/job_offers/new'
   fill_in('job_offer[title]', with: title)
   click_button('Create')
+  click_button('Activate')
 end
 
 When('I access "My Offers"') do
   visit '/job_offers/my'
-  click_button('Activate')
 end
 
 Then('the offer {string} has {int} applications') do |title, q_applicants|

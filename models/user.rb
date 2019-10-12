@@ -10,6 +10,7 @@ class User
                                               message: 'invalid email' }
 
   def initialize(data = {})
+    validate_password(data[:password])
     @id = data[:id]
     @name = data[:name]
     @email = data[:email]
@@ -25,5 +26,11 @@ class User
 
   def has_password?(password)
     Crypto.decrypt(crypted_password) == password
+  end
+
+  private
+
+  def validate_password(password)
+    raise 'password is less then 8 characters' if !password.nil? && password.size < 8
   end
 end

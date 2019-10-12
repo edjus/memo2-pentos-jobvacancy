@@ -55,4 +55,12 @@ describe User do
       expect(user).to have_password(password)
     end
   end
+
+  describe 'invalid password' do
+    it 'raise error when password size is less than 8 characters' do
+      expect do
+        described_class.new(email: 'john.doe@someplace.com', password: 'got')
+      end.to raise_error 'password is less then 8 characters'
+    end
+  end
 end

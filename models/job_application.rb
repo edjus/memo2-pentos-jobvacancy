@@ -1,6 +1,10 @@
 class JobApplication
+  include ActiveModel::Validations
+
   attr_accessor :applicant_email
-  attr_accessor :job_offer
+  attr_accessor :job_offer, :id, :updated_on, :created_on
+
+  validates :applicant_email, :job_offer, presence: true
 
   def self.create_for(email, offer)
     app = JobApplication.new

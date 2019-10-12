@@ -33,5 +33,13 @@ Around do |_scenario, block|
   DB.transaction(rollback: :always, auto_savepoint: true) { block.call }
 end
 
+Before do
+  # clean mails after running tests
+  mail_store = "#{Padrino.root}/tmp/emails"
+  Dir.each_child(mail_store) do |file|
+    File.delete("#{mail_store}/#{file}")
+  end
+end
+
 # Capybara.default_driver = :selenium
 Capybara.app = JobVacancy::App.tap { |app| }

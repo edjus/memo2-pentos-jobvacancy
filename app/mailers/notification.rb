@@ -43,7 +43,7 @@
 JobVacancy::App.mailer :notification do
   email :contact_info_email do |job_application|
     from 'Job Vacancy <no_reply@jobvacancy.com>'
-    to job_application.applicant_email
+    to job_application.applicant.email
     subject 'Job Application: Contact information'
     locals application: job_application
     content_type :plain

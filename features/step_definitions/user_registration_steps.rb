@@ -25,3 +25,7 @@ end
 Then('I am redirected to home page') do
   expect(page.current_path).to eq('/')
 end
+
+Then('I am still in Registration page') do
+  expect(page.current_path).to eq('/users/create')
+end

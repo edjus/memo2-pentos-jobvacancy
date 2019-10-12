@@ -31,6 +31,6 @@ class User
   private
 
   def validate_password(password)
-    raise 'password is less then 8 characters' if !password.nil? && password.size < 8
+    raise 'passwords must have at least 8 characters' if !password.nil? && password.size < 8
   end
 end

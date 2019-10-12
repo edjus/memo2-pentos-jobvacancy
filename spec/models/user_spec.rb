@@ -98,5 +98,11 @@ describe User do
         described_class.new(email: 'john.doe@someplace.com', password: 'asdfgh/Bjkl')
       end.to raise_error 'passwords must be alphanumeric'
     end
+
+    it 'dont raise error when password have a number' do
+      expect do
+        described_class.new(email: 'john.doe@someplace.com', password: 'asd1fgh87/Bjkl')
+      end.not_to raise_error 'passwords must be alphanumeric'
+    end
   end
 end

@@ -86,5 +86,11 @@ describe User do
         described_class.new(email: 'john.doe@someplace.com', password: 'asdfghBjkl')
       end.to raise_error 'passwords must have at least one special character'
     end
+
+    it 'dont raise error when password have some special character' do
+      expect do
+        described_class.new(email: 'john.doe@someplace.com', password: 'asdf ghB.jkl')
+      end.not_to raise_error 'passwords must have at least one special character'
+    end
   end
 end

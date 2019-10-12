@@ -34,5 +34,9 @@ class User
     return if password.nil?
     raise 'passwords must have at least 8 characters' if password.size < 8
     raise 'passwords must have at least one Upper Case character' if password !~ /[A-Z]/
+
+    special_characters = " !\"#$%&'()*+,-./:;<=>?@[\]^_`{|}~"
+    regex = /[#{special_characters.gsub(/./) { |char| "\\#{char}" }}]/
+    raise 'passwords must have at least one special character' if password !~ regex
   end
 end

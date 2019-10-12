@@ -40,7 +40,7 @@ describe User do
   end
 
   describe 'has password?' do
-    let(:password) { 'passwordP' }
+    let(:password) { 'pass.wordP' }
     let(:user) do
       described_class.new(password: password,
                           email: 'john.doe@someplace.com',
@@ -63,7 +63,7 @@ describe User do
       end.to raise_error 'passwords must have at least 8 characters'
     end
 
-    it 'raise error when password without upper case character' do
+    it 'raise error when password does not have upper case character' do
       expect do
         described_class.new(email: 'john.doe@someplace.com', password: 'asdfghjkl')
       end.to raise_error 'passwords must have at least one Upper Case character'
@@ -79,6 +79,12 @@ describe User do
       expect do
         described_class.new(email: 'john.doe@someplace.com', password: 'asDfGhjkL')
       end.not_to raise_error 'passwords must have at least one Upper Case character'
+    end
+
+    it 'raise error when password does not have special character' do
+      expect do
+        described_class.new(email: 'john.doe@someplace.com', password: 'asdfghBjkl')
+      end.to raise_error 'passwords must have at least one special character'
     end
   end
 end

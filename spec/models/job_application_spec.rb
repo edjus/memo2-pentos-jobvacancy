@@ -28,6 +28,13 @@ describe JobApplication do
     end
   end
 
+  describe 'applicant_curriculum' do
+    it 'should return "not specified" when the applicant curriculum is not set' do
+      ja = described_class.create_for(email, '', offer)
+      expect(ja.applicant_curriculum).to eq('not specified')
+    end
+  end
+
   describe 'process' do
     it 'should deliver contact info notification' do
       ja = described_class.create_for(email, curriculum, offer)

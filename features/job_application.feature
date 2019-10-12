@@ -17,7 +17,6 @@ Feature: Job Application
     Then I should receive a mail with offerer info
     And It should include "Curriculum: linkedin.com/applicant.profile"
 
-  @wip
   Scenario: Apply to job offer without curriculum
     Given I access the offers list page
     When I apply with no curriculum

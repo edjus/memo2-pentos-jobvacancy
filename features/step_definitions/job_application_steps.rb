@@ -39,3 +39,7 @@ Then('It should include {string}') do |text|
 
   content.include?(text).should be true
 end
+
+When('I apply with no curriculum') do
+  step 'I apply'
+end

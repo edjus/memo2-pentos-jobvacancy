@@ -10,3 +10,10 @@ Feature: Job Application
     Given I access the offers list page
     When I apply
     Then I should receive a mail with offerer info
+
+  @wip
+  Scenario: Apply to job offer with curriculum
+    Given I access the offers list page
+    When I apply with curriculum "linkedin.com/applicant.profile"
+    Then I should receive a mail with offerer info
+    And It should include "Curriculum: linkedin.com/applicant.profile"

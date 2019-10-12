@@ -74,5 +74,11 @@ describe User do
         described_class.new(email: 'john.doe@someplace.com', password: 'asdfghjkL')
       end.not_to raise_error 'passwords must have at least one Upper Case character'
     end
+
+    it 'dont raise error when password have some upper case characters' do
+      expect do
+        described_class.new(email: 'john.doe@someplace.com', password: 'asDfGhjkL')
+      end.not_to raise_error 'passwords must have at least one Upper Case character'
+    end
   end
 end

@@ -27,6 +27,18 @@ Feature: Job Offers CRUD
     Then I should see "Offer deleted"
     And I should not see "Programmer vacancy!!!" in My Offers
 
+  Scenario: Job applications quantity with none applicants
+    Given I have an job offer titled "Programador Java", on "Buenos Aires" with description "Full-stack Java Dev"
+    When I access "My Offers"
+    Then the offer "Programador Java" has 0 applications
+
+  Scenario: Job applications quantity with two applicants
+    Given I have an job offer titled "Programador Java Junior", on "Buenos Aires" with description "Full-stack Java Dev"
+    And job applicant named "Juan Medina" applied for "Programador Java Junior"
+    And job applicant named "John Doe" applied for "Programador Java Junior"
+    When I access "My Offers"
+    Then the offer "Programador Java Junior" has 2 applications
+
   Scenario: Create from existing
     Given an offer with title "Java dev", location "Buenos Aires" and description "Full stack Java dev" exists
     And I access the my offers page

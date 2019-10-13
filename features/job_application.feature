@@ -22,3 +22,10 @@ Feature: Job Application
     When I apply with no curriculum
     Then I should receive a mail with offerer info
     And It should include "Curriculum: not specified"
+
+  Scenario: Expected remuneration when applying
+    Given I access the offers list page
+    When I apply with remuneration between 30000 and 60000
+    Then I should receive a mail with offerer info
+    And It should include "Expected remuneration: between 30000 and 60000"	
+

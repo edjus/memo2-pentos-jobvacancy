@@ -9,8 +9,14 @@
 
   <%= f.label :applicant_curriculum %>
   <%= f.text_field :applicant_curriculum %>
+  
+  <%= f.label :expected_remuneration_min %>
+  <%= f.text_field :expected_remuneration_min %>
+  
+  <%= f.label :expected_remuneration_max %>
+  <%= f.text_field :expected_remuneration_max %>
 
-	<hr/>
+  <hr/>
   <%= f.submit "Apply", :class => "btn btn-primary" %>
   <%= link_to 'Cancel', url_for(:job_offers, :latest), :class => "btn btn-secondary" %>
 <% end %>

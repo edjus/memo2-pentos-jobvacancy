@@ -49,3 +49,14 @@ end
 When('I apply with no curriculum') do
   step 'I apply'
 end
+
+When('I apply with remuneration between {int} and {int}') do |ini_range, end_range|
+  click_link 'Apply'
+  fill_in('job_application[applicant_email]', with: 'applicant@test.com')
+  fill_in('job_application[expected_remuneration_min]', with: ini_range)
+  fill_in('job_application[expected_remuneration_max]', with: end_range)
+  click_button('Apply')
+end
+
+Then('the offeror receives an mail with the applicant info') do
+end

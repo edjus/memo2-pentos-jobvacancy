@@ -2,10 +2,10 @@ class RemunerationRange
   include ActiveModel::Validations
   attr_accessor :min, :max
 
-  validate :validation_positive
+  validate :validate_positive
   validate :validate_present
 
-  def validation_positive
+  def validate_positive
     errors.add(:min, :max, message: 'should be positive') if min.to_i.negative? ||
                                                              max.to_i.negative?
   end

@@ -4,6 +4,7 @@ describe JobApplication do
   let(:email) { 'applicant@test.com' }
   let(:curriculum) { 'linkedin.com/applicant.profile' }
   let(:applicant) { JobApplicant.create_for(email, curriculum) }
+  let(:rem) { RemunerationRange.create_for(2000, 3000) }
   let(:offer) { JobOffer.new }
 
   describe 'model' do
@@ -14,21 +15,21 @@ describe JobApplication do
 
   describe 'create_for' do
     it 'should set applicant' do
-      ja = described_class.create_for(applicant, offer)
+      ja = described_class.create_for(applicant, offer, rem)
 
       expect(ja.applicant.email).to eq(email)
       expect(ja.applicant.curriculum).to eq(curriculum)
     end
 
     it 'should set job_offer' do
-      ja = described_class.create_for(applicant, offer)
+      ja = described_class.create_for(applicant, offer, rem)
       expect(ja.job_offer).to eq(offer)
     end
   end
 
   describe 'process' do
     it 'should deliver contact info notification' do
-      ja = described_class.create_for(applicant, offer)
+      ja = described_class.create_for(applicant, offer, rem)
       expect(JobVacancy::App).to receive(:deliver).with(:notification, :contact_info_email, ja)
       ja.process
     end

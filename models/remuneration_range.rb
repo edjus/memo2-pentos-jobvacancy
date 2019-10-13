@@ -1,8 +1,9 @@
 class RemunerationRange
   include ActiveModel::Validations
   attr_accessor :min, :max
-  
-  validates :min, :max, presence: true
+
+  validates :min, presence: true, unless: :max
+  validates :max, presence: true, unless: :min
 
   def self.create_for(min_price, max_price)
     range = RemunerationRange.new

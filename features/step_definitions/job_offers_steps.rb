@@ -73,3 +73,39 @@ Then('the offer {string} has {int} applications') do |title, q_applicants|
     page.should have_content(q_applicants)
   end
 end
+
+Given('I access the my offers page') do
+  visit '/job_offers/my'
+  page.should have_content('My Job Offers')
+end
+
+Given('an offer with title {string}, location {string} and description {string} exists') do |title, location, description|
+  create_offer title, location, description
+end
+
+When('I click copy for {string}') do |title|
+  within('tr', text: title) do
+    click_link('Copy')
+  end
+end
+
+Then('the title field value should be {string}') do |title|
+  value = find_field('job_offer[title]').value
+  expect(title).to eq(value)
+end
+
+Then('the location field value should be {string}') do |location|
+  value = find_field('job_offer[location]').value
+  expect(location).to eq(value)
+end
+
+Then('the description field value should be {string}') do |description|
+  value = find_field('job_offer[description]').value
+  expect(description).to eq(value)
+end
+
+When('the offer {string} should have {string}') do |title, value|
+  within('tr', text: title) do
+    page.should have_content(value)
+  end
+end

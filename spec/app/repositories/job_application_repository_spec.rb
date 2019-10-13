@@ -2,10 +2,15 @@ require 'integration_spec_helper'
 
 describe JobApplicationRepository do
   let(:repository) { described_class.new }
-
-  let(:application2) { JobApplication.create_for('email1@gmail.com', job_offer) }
-  let(:application1) { JobApplication.create_for('email2@gmail.com', job_offer) }
+  let(:email1) { 'applicant@test.com' }
+  let(:email2) { 'applicant2@test.com' }
+  let(:curriculum) { 'linkedin.com/applicant.profile' }
+  let(:applicant1) { JobApplicant.create_for(email1, curriculum) }
+  let(:applicant2) { JobApplicant.create_for(email2, curriculum) }
   let(:job_offer) { JobOffer.new(id: 1) }
+
+  let(:application1) { JobApplication.create_for(applicant1, job_offer) }
+  let(:application2) { JobApplication.create_for(applicant2, job_offer) }
 
   it 'Given an offer, if a make cero applications,
         when i ask the repository for how many applciants has the offer

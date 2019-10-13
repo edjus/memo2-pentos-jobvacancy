@@ -1,12 +1,7 @@
 Given(/^only a "(.*?)" offer exists in the offers list$/) do |job_title|
-  @job_offer = JobOffer.new
-  @job_offer.owner = UserRepository.new.first
-  @job_offer.title = job_title
-  @job_offer.location = 'a nice job'
-  @job_offer.description = 'a nice job'
-  @job_offer.is_active = true
+  JobOfferRepository.new.delete_all
 
-  JobOfferRepository.new.save @job_offer
+  @job_offer = create_offer job_title
 end
 
 Given(/^I access the offers list page$/) do
@@ -35,4 +30,22 @@ Given('job applicant named {string} applied for {string}') do |name, _job_title|
   click_link 'Apply'
   fill_in('job_application[applicant_email]', with: name + '@test.com')
   click_button('Apply')
+end
+When('I apply with curriculum {string}') do |curriculum|
+  click_link 'Apply'
+  fill_in('job_application[applicant_email]', with: 'applicant@test.com')
+  fill_in('job_application[applicant_curriculum]', with: curriculum)
+  click_button('Apply')
+end
+
+Then('It should include {string}') do |text|
+  mail_store = "#{Padrino.root}/tmp/emails"
+  file = File.open("#{mail_store}/applicant@test.com", 'r')
+  content = file.read
+
+  content.include?(text).should be true
+end
+
+When('I apply with no curriculum') do
+  step 'I apply'
 end

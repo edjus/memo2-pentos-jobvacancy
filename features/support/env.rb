@@ -38,7 +38,7 @@ Before do
   mail_store = "#{Padrino.root}/tmp/emails"
   if Dir.exist?(mail_store)
     Dir.each_child(mail_store) do |file|
-      File.delete("#{mail_store}/#{file}")
+      # File.delete("#{mail_store}/#{file}")
     end
   end
 end

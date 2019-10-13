@@ -3,8 +3,7 @@ class JobApplicationRepository < BaseRepository
   self.model_class = 'JobApplication'
 
   def how_many_applicants?(offer_id)
-    applicants = dataset.select(:applicant_email).where(job_offer_id: offer_id).all
-    applicants.size
+    dataset.select(:applicant_email).where(job_offer_id: offer_id).count
   end
 
   protected

@@ -10,7 +10,6 @@ JobVacancy::App.controllers :users do
 
     begin
       @user = User.new(params[:user])
-
       if params[:user][:password] == password_confirmation
         if UserRepository.new.save(@user)
           flash[:success] = 'User created'
@@ -23,8 +22,8 @@ JobVacancy::App.controllers :users do
         flash.now[:error] = 'Passwords do not match'
         render 'users/new'
       end
-    rescue StandardError => exception
-      flash.now[:error] = "Sorry, #{exception}"
+    rescue InsecurePasswordException => e
+      flash.now[:error] = "Sorry, #{e.message}"
       @user = User.new
       render 'users/new'
     end

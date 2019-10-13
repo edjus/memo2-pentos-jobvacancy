@@ -43,16 +43,23 @@ JobVacancy::App.controllers :job_offers do
     max_range = params[:job_application][:expected_remuneration_max]
     remuneration = RemunerationRange.create_for(min_range, max_range)
 
-    applicant_email = params[:job_application][:applicant_email]
-    applicant_curriculum = params[:job_application][:applicant_curriculum]
-    applicant = JobApplicant.create_for(applicant_email, applicant_curriculum)
+    if remuneration.invalid?
+      @job_offer = JobOfferRepository.new.find(params[:offer_id])
+      @job_application = JobApplication.new
+      flash.now[:error] = 'Invalid Range'
+      render 'job_offers/apply'
+    else
+      applicant_email = params[:job_application][:applicant_email]
+      applicant_curriculum = params[:job_application][:applicant_curriculum]
+      applicant = JobApplicant.create_for(applicant_email, applicant_curriculum)
 
-    @job_application = JobApplication.create_for(applicant, @job_offer, remuneration)
-    JobApplicationRepository.new.save(@job_application)
-    @job_application.process
+      @job_application = JobApplication.create_for(applicant, @job_offer, remuneration)
+      JobApplicationRepository.new.save(@job_application)
+      @job_application.process
 
-    flash[:success] = 'Contact information sent.'
-    redirect '/job_offers'
+      flash[:success] = 'Contact information sent.'
+      redirect '/job_offers'
+    end
   end
 
   get :copy do

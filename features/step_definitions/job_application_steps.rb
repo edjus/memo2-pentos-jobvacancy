@@ -29,6 +29,8 @@ Given('job applicant named {string} applied for {string}') do |name, _job_title|
   visit '/job_offers/latest'
   click_link 'Apply'
   fill_in('job_application[applicant_email]', with: name + '@test.com')
+  fill_in('job_application[expected_remuneration_min]', with: 200)
+  fill_in('job_application[expected_remuneration_max]', with: 300)
   click_button('Apply')
 end
 When('I apply with curriculum {string}') do |curriculum|
@@ -63,4 +65,8 @@ Then('the offeror receives an mail which includes {string}') do |text|
   file = File.open("#{mail_store}/offerer@test.com", 'r')
   content = file.read
   content.include?(text).should be true
+end
+
+Then('I am still in offer list page') do
+  expect(page.current_path).to include('job_offers/apply/')
 end

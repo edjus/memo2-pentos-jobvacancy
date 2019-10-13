@@ -58,5 +58,9 @@ When('I apply with remuneration between {int} and {int}') do |ini_range, end_ran
   click_button('Apply')
 end
 
-Then('the offeror receives an mail with the applicant info') do
+Then('the offeror receives an mail which includes {string}') do |text|
+  mail_store = "#{Padrino.root}/tmp/emails"
+  file = File.open("#{mail_store}/offerer@test.com", 'r')
+  content = file.read
+  content.include?(text).should be true
 end

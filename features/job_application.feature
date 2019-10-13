@@ -26,6 +26,7 @@ Feature: Job Application
   Scenario: Expected remuneration when applying
     Given I access the offers list page
     When I apply with remuneration between 30000 and 60000
-    Then I should receive a mail with offerer info
+    Then the offeror receives an mail which includes "Expected remuneration: between 30000 and 60000"
+    And I should receive a mail with offerer info
     And It should include "Expected remuneration: between 30000 and 60000"	
 

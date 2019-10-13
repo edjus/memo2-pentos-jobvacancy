@@ -45,6 +45,7 @@ JobVacancy::App.controllers :job_offers do
     applicant = JobApplicant.create_for(applicant_email, applicant_curriculum)
 
     @job_application = JobApplication.create_for(applicant, @job_offer)
+    JobApplicationRepository.new.save(@job_application)
     @job_application.process
 
     flash[:success] = 'Contact information sent.'

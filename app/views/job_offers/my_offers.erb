@@ -5,6 +5,7 @@
 		<th>Location</th>
 		<th>Description</th>
 		<th>Is active</th>
+		<th>Aplicants</th>
 		<th>Actions</th>
 	</tr>
 	<% @offers.each do | offer| %>
@@ -22,7 +23,9 @@
 		<td>
 			<%= offer.is_active %>
 		</td>		
-
+		<td>
+			<%= applicants(offer.id) %>
+	   </td>
 		<td>
 			<%= link_to 'Edit', url_for(:job_offers, :edit, :offer_id => offer.id), :class => "btn btn-primary" %>
       <%= link_to 'Copy', url_for(:job_offers, :copy, :offer_id => offer.id), :class => 'btn btn-secondary' %>

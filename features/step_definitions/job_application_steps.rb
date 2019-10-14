@@ -11,6 +11,8 @@ end
 When(/^I apply$/) do
   click_link 'Apply'
   fill_in('job_application[applicant_email]', with: 'applicant@test.com')
+  fill_in('job_application[expected_remuneration_min]', with: 200)
+  fill_in('job_application[expected_remuneration_max]', with: 300)
   click_button('Apply')
 end
 
@@ -37,6 +39,8 @@ When('I apply with curriculum {string}') do |curriculum|
   click_link 'Apply'
   fill_in('job_application[applicant_email]', with: 'applicant@test.com')
   fill_in('job_application[applicant_curriculum]', with: curriculum)
+  fill_in('job_application[expected_remuneration_min]', with: 200)
+  fill_in('job_application[expected_remuneration_max]', with: 300)
   click_button('Apply')
 end
 

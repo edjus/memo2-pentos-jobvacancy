@@ -44,7 +44,6 @@ JobVacancy::App.controllers :job_offers do
     remuneration = RemunerationRange.create_for(min_range, max_range)
 
     if remuneration.invalid?
-      @job_offer = JobOfferRepository.new.find(params[:offer_id])
       @job_application = JobApplication.new
       flash.now[:error] = 'Invalid Range'
       render 'job_offers/apply'

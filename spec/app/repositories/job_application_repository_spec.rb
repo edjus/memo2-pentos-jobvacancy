@@ -8,9 +8,10 @@ describe JobApplicationRepository do
   let(:applicant1) { JobApplicant.create_for(email1, curriculum) }
   let(:applicant2) { JobApplicant.create_for(email2, curriculum) }
   let(:job_offer) { JobOffer.new(id: 1) }
+  let(:rem) { RemunerationRange.create_for(2000, 3000) }
 
-  let(:application1) { JobApplication.create_for(applicant1, job_offer) }
-  let(:application2) { JobApplication.create_for(applicant2, job_offer) }
+  let(:application1) { JobApplication.create_for(applicant1, job_offer, rem) }
+  let(:application2) { JobApplication.create_for(applicant2, job_offer, rem) }
 
   it 'Given an offer, if a make cero applications,
         when i ask the repository for how many applciants has the offer

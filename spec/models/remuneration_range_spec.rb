@@ -41,5 +41,10 @@ describe RemunerationRange do
       remuneration_range = described_class.create_for(3000, -3000)
       expect(remuneration_range).not_to be_valid
     end
+
+    it 'should not be valid create a range 60000 and 30000' do
+      remuneration_range = described_class.create_for(60_000, 30_000)
+      expect(remuneration_range).not_to be_valid
+    end
   end
 end

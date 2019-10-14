@@ -50,9 +50,15 @@ Feature: Job Application
     And I should see "Invalid Range"
 
   Scenario: End value of the remuneration range is negative
-      Given I access the offers list page
-      When I apply with remuneration between 30000 and -10000
-      Then I am still in offer list page
-      And I should see "Invalid Range"
+    Given I access the offers list page
+    When I apply with remuneration between 30000 and -10000
+    Then I am still in offer list page
+    And I should see "Invalid Range"
+
+  Scenario: Inital value is grater than end value
+    Given I access the offers list page
+    When I apply with remuneration between 60000 and 30000
+    Then I am still in offer list page
+    And I should see "Invalid Range"
 
 

@@ -2,17 +2,29 @@ class RemunerationRange
   include ActiveModel::Validations
   attr_accessor :min, :max
 
-  validate :validate_positive
+  validate :correct_order
   validate :validate_present
+  validate :validate_positive
 
   def validate_positive
-    errors.add(:min, :max, message: 'should be positive') if min.to_i.negative? ||
-                                                             max.to_i.negative?
+    errors.add(:min, :max, message: 'should be positive') if min.negative? ||
+                                                             max.negative?
   end
 
   def validate_present
-    errors.add(:min, :max, message: 'at least one should be present') if min.to_i.zero? &&
-                                                                         min.to_i.zero?
+    errors.add(:min, :max, message: 'at least one should be present') if min.zero? &&
+                                                                         max.zero?
+  end
+
+  def correct_order
+    if (min >
+                                                                               max) &&
+       (min != 0 &&
+       max != 0)
+      errors.add(:min,
+                 :max,
+                 message: 'inital value should be less or eq than end value')
+    end
   end
 
   def self.create_for(min_price, max_price)

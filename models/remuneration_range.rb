@@ -33,4 +33,12 @@ class RemunerationRange
     range.max = max_price.to_i
     range
   end
+
+  def range_message
+    return min.to_s if min == max
+    return "starting from #{min}" if max.zero?
+    return "up to #{max}" if min.zero?
+
+    "between #{min} and #{max}"
+  end
 end

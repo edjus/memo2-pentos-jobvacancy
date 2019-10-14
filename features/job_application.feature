@@ -61,4 +61,23 @@ Feature: Job Application
     Then I am still in offer list page
     And I should see "Invalid Range"
 
+  Scenario: Specific expected remuneration when applying
+    Given I access the offers list page
+    When I apply with remuneration between 30000 and 30000
+    Then the offeror receives an mail which includes "Expected remuneration: 30000"
+    And I should receive a mail with offerer info
+    And It should include "Expected remuneration: 30000"	
+  
+  Scenario: Minimum expected remuneration when applying
+    Given I access the offers list page
+    When I apply with remuneration between 30000 and 0
+    Then the offeror receives an mail which includes "Expected remuneration: starting from 30000"
+    And I should receive a mail with offerer info
+    And It should include "Expected remuneration: starting from 30000"
 
+  Scenario: Maximum expected remuneration when applying
+    Given I access the offers list page
+    When I apply with remuneration between 0 and 60000
+    Then the offeror receives an mail which includes "Expected remuneration: up to 60000"
+    And I should receive a mail with offerer info
+    And It should include "Expected remuneration: up to 60000"

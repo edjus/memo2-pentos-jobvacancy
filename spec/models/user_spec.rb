@@ -40,7 +40,7 @@ describe User do
   end
 
   describe 'has password?' do
-    let(:password) { 'password' }
+    let(:password) { 'pass.word1P' }
     let(:user) do
       described_class.new(password: password,
                           email: 'john.doe@someplace.com',
@@ -53,6 +53,56 @@ describe User do
 
     it 'should return true when password do  match' do
       expect(user).to have_password(password)
+    end
+  end
+
+  describe 'password validation' do
+    it 'raise error when password size is less than 8 characters' do
+      expect do
+        described_class.new(email: 'john.doe@someplace.com', password: 'got')
+      end.to raise_error 'passwords must have at least 8 characters'
+    end
+
+    it 'raise error when password does not have upper case character' do
+      expect do
+        described_class.new(email: 'john.doe@someplace.com', password: 'asdfghjkl')
+      end.to raise_error 'passwords must have at least one Upper Case character'
+    end
+
+    it 'dont raise error when password have one upper case character' do
+      expect do
+        described_class.new(email: 'john.doe@someplace.com', password: 'asdfghjkL')
+      end.not_to raise_error 'passwords must have at least one Upper Case character'
+    end
+
+    it 'dont raise error when password have some upper case characters' do
+      expect do
+        described_class.new(email: 'john.doe@someplace.com', password: 'asDfGhjkL')
+      end.not_to raise_error 'passwords must have at least one Upper Case character'
+    end
+
+    it 'raise error when password does not have special character' do
+      expect do
+        described_class.new(email: 'john.doe@someplace.com', password: 'asdfghBjkl')
+      end.to raise_error 'passwords must have at least one special character'
+    end
+
+    it 'dont raise error when password have some special character' do
+      expect do
+        described_class.new(email: 'john.doe@someplace.com', password: 'asdf ghB.jkl')
+      end.not_to raise_error 'passwords must have at least one special character'
+    end
+
+    it 'raise error when password does not have a number' do
+      expect do
+        described_class.new(email: 'john.doe@someplace.com', password: 'asdfgh/Bjkl')
+      end.to raise_error 'passwords must be alphanumeric'
+    end
+
+    it 'dont raise error when password have a number' do
+      expect do
+        described_class.new(email: 'john.doe@someplace.com', password: 'asd1fgh87/Bjkl')
+      end.not_to raise_error 'passwords must be alphanumeric'
     end
   end
 end

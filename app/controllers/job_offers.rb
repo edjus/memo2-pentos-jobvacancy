@@ -33,17 +33,39 @@ JobVacancy::App.controllers :job_offers do
   end
 
   post :search do
-    @offers = JobOfferRepository.new.search_by_title(params[:q])
+    @offers = JobOfferRepository.new.search_by_title(params['search-input'])
     render 'job_offers/list'
   end
 
   post :apply, with: :offer_id do
     @job_offer = JobOfferRepository.new.find(params[:offer_id])
-    applicant_email = params[:job_application][:applicant_email]
-    @job_application = JobApplication.create_for(applicant_email, @job_offer)
-    @job_application.process
-    flash[:success] = 'Contact information sent.'
-    redirect '/job_offers'
+    min_range = params[:job_application][:expected_remuneration_min]
+    max_range = params[:job_application][:expected_remuneration_max]
+    remuneration = RemunerationRange.create_for(min_range, max_range)
+
+    if remuneration.invalid?
+      @job_application = JobApplication.new
+      flash.now[:error] = 'Invalid Range'
+      render 'job_offers/apply'
+    else
+      applicant_email = params[:job_application][:applicant_email]
+      applicant_curriculum = params[:job_application][:applicant_curriculum]
+      applicant = JobApplicant.create_for(applicant_email, applicant_curriculum)
+
+      @job_application = JobApplication.create_for(applicant, @job_offer, remuneration)
+      JobApplicationRepository.new.save(@job_application)
+      @job_application.process
+
+      flash[:success] = 'Contact information sent.'
+      redirect '/job_offers'
+    end
+  end
+
+  get :copy do
+    puts params
+    @job_offer = JobOfferRepository.new.find(params[:offer_id])
+
+    render 'job_offers/new'
   end
 
   post :create do

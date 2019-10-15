@@ -3,8 +3,9 @@ Job Vacancy Board
 
 You have appied to the following offer:
 
-* Title: <%= job_offer.title %>
-* Location: <%= job_offer.location %>
-* Description: <%= job_offer.description %>
-
-You can contact the publisher of this offer by writing <%= job_offer.owner.name %> to <%= job_offer.owner.email %>
+* Title: <%= application.job_offer.title %>
+* Location: <%= application.job_offer.location %>
+* Description: <%= application.job_offer.description %>
+* Curriculum: <%= application.applicant.curriculum %>
+* Expected remuneration: <%= application.remuneration.range_message %>
+You can contact the publisher of this offer by writing <%= application.job_offer.owner.name %> to <%= application.job_offer.owner.email %>

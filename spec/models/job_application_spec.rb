@@ -1,29 +1,37 @@
 require 'spec_helper'
 
 describe JobApplication do
+  let(:email) { 'applicant@test.com' }
+  let(:curriculum) { 'linkedin.com/applicant.profile' }
+  let(:applicant) { JobApplicant.create_for(email, curriculum) }
+  let(:rem) { RemunerationRange.create_for(2000, 3000) }
+  let(:offer) { JobOffer.new }
+
   describe 'model' do
-    it { is_expected.to respond_to(:applicant_email) }
+    it { is_expected.to respond_to(:applicant) }
     it { is_expected.to respond_to(:job_offer) }
+    it { is_expected.to respond_to(:id) }
   end
 
   describe 'create_for' do
-    it 'should set applicant_email' do
-      email = 'applicant@test.com'
-      ja = described_class.create_for(email, JobOffer.new)
-      expect(ja.applicant_email).to eq(email)
+    it 'should set applicant' do
+      ja = described_class.create_for(applicant, offer, rem)
+
+      expect(ja.applicant.email).to eq(email)
+      expect(ja.applicant.curriculum).to eq(curriculum)
     end
 
     it 'should set job_offer' do
-      offer = JobOffer.new
-      ja = described_class.create_for('applicant@test.com', offer)
+      ja = described_class.create_for(applicant, offer, rem)
       expect(ja.job_offer).to eq(offer)
     end
   end
 
   describe 'process' do
     it 'should deliver contact info notification' do
-      ja = described_class.create_for('applicant@test.com', JobOffer.new)
-      expect(JobVacancy::App).to receive(:deliver).with(:notification, :contact_info_email, ja)
+      ja = described_class.create_for(applicant, offer, rem)
+      expect(JobVacancy::App).to receive(:deliver).with(any_args, :contact_info_email, ja)
+      expect(JobVacancy::App).to receive(:deliver).with(any_args, :contact_info_email, ja)
       ja.process
     end
   end

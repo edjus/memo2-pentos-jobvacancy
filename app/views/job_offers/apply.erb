@@ -7,7 +7,16 @@
   <%= f.label :applicant_email %>
  	<%= f.text_field :applicant_email %>
 
-	<hr/>
+  <%= f.label :applicant_curriculum %>
+  <%= f.text_field :applicant_curriculum %>
+  
+  <%= f.label :expected_remuneration_min %> <span>(ARS$)</span>
+  <%= f.text_field :expected_remuneration_min %>
+  
+  <%= f.label :expected_remuneration_max %> <span>(ARS$)</span>
+  <%= f.text_field :expected_remuneration_max %>
+
+  <hr/>
   <%= f.submit "Apply", :class => "btn btn-primary" %>
   <%= link_to 'Cancel', url_for(:job_offers, :latest), :class => "btn btn-secondary" %>
 <% end %>

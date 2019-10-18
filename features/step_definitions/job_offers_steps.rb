@@ -109,3 +109,13 @@ When('the offer {string} should have {string}') do |title, value|
     page.should have_content(value)
   end
 end
+
+When('I click on view the offer applications') do
+  click_link('View')
+end
+
+Then('the table should be empty') do
+  table_body = find('tbody')
+
+  expect(table_body).to have_no_content('*')
+end

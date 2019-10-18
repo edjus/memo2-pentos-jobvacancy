@@ -20,6 +20,8 @@ module NavigationHelpers
     #     user_profile_path(User.find_by_login($1))
     when /the copy offer page/
       '/job_offers/copy'
+    when /the offer's applications page/
+      '/job_offers/view'
     else
       raise "Can't find mapping from \"#{page_name}\" to a path.\n" \
             "Now, go and add a mapping in #{__FILE__}"

@@ -71,10 +71,15 @@ JobVacancy::App.controllers :job_offers do
   end
 
   get :copy do
-    puts params
     @job_offer = JobOfferRepository.new.find(params[:offer_id])
 
     render 'job_offers/new'
+  end
+
+  get :view do
+    @job_offer = JobOfferRepository.new.find(params[:offer_id])
+
+    render 'job_offers/view'
   end
 
   post :create do

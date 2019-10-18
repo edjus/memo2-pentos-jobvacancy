@@ -26,4 +26,14 @@ describe JobApplicationRepository do
     repository.save(application2)
     expect(repository.how_many_applicants?(job_offer.id)).to eq 2
   end
+
+  describe 'find_by_offer' do
+    it 'returns an empty array when there are no applications for a given offer' do
+      offer_id = 2
+
+      applications = repository.find_by_offer(offer_id)
+
+      expect(applications.empty?).to eq(true)
+    end
+  end
 end

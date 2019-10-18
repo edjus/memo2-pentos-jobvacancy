@@ -35,5 +35,15 @@ describe JobApplicationRepository do
 
       expect(applications.empty?).to eq(true)
     end
+
+    it 'returns an array with the offer applications' do
+      repository.save(application1)
+      repository.save(application2)
+
+      offer_id = 1
+      applications = repository.find_by_offer(offer_id)
+
+      expect(applications.size).to eq(2)
+    end
   end
 end

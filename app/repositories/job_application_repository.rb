@@ -6,8 +6,8 @@ class JobApplicationRepository < BaseRepository
     dataset.select(:applicant_email).where(job_offer_id: offer_id).count
   end
 
-  def find_by_offer(_offer_id)
-    []
+  def find_by_offer(offer_id)
+    load_collection dataset.where(job_offer_id: offer_id)
   end
 
   protected

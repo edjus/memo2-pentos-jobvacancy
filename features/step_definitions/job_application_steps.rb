@@ -56,6 +56,10 @@ When('I apply with no curriculum') do
   step 'I apply'
 end
 
+When('I apply with no bio') do
+  step 'I apply'
+end
+
 When('I apply with remuneration between {int} and {int}') do |ini_range, end_range|
   click_link 'Apply'
   fill_in('job_application[applicant_email]', with: 'applicant@test.com')

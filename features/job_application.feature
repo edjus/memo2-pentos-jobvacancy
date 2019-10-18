@@ -81,7 +81,6 @@ Feature: Job Application
     Then I should receive a mail with offerer info
     And It should include "Bio: This is a short bio about me! I like cooking, golf and dogs. My favorite color is #c0ffee"
 
-  @wip
   Scenario: apply to job offer with no bio
     Given I access the offers list page
     When I apply with no bio

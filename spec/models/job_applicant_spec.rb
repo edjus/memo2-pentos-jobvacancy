@@ -30,4 +30,11 @@ describe JobApplicant do
       expect(applicant.curriculum).to eq('not specified')
     end
   end
+
+  describe 'bio' do
+    it 'should return "not specified" when the bio curriculum is not set' do
+      applicant = described_class.create_for(email, '')
+      expect(applicant.bio).to eq('not specified')
+    end
+  end
 end

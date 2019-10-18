@@ -1,6 +1,6 @@
 class JobApplicant
-  attr_accessor :email, :bio
-  attr_writer :curriculum
+  attr_accessor :email
+  attr_writer :curriculum, :bio
 
   def self.create_for(email, curriculum, bio = '')
     applicant = JobApplicant.new
@@ -14,5 +14,11 @@ class JobApplicant
     return 'not specified' if @curriculum.nil? || @curriculum.empty?
 
     @curriculum
+  end
+
+  def bio
+    return 'not specified' if @bio.empty?
+
+    @bio
   end
 end

@@ -7,11 +7,12 @@ class JobApplication
 
   validates :applicant, :job_offer, presence: true
 
-  def self.create_for(applicant, offer, remuneration_range)
+  def self.create_for(applicant, offer, remuneration_range, bio = '')
     app = JobApplication.new
     app.applicant = applicant
     app.job_offer = offer
     app.remuneration = remuneration_range
+    app.bio = bio
     app
   end
 

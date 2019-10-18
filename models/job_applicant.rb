@@ -1,5 +1,5 @@
 class JobApplicant
-  attr_accessor :email
+  attr_accessor :email, :bio
   attr_writer :curriculum
 
   def self.create_for(email, curriculum)

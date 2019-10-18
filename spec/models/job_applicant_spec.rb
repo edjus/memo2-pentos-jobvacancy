@@ -7,6 +7,7 @@ describe JobApplicant do
   describe 'model' do
     it { is_expected.to respond_to(:email) }
     it { is_expected.to respond_to(:curriculum) }
+    it { is_expected.to respond_to(:bio) }
   end
 
   describe 'create_for' do

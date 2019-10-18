@@ -59,3 +59,11 @@ Feature: Job Offers CRUD
     And I should see "Java dev Sr" in My Offers
     And the offer "Java dev Sr" should have "Buenos Aires"
     And the offer "Java dev Sr" should have "Full stack Java dev"
+
+  @wip
+  Scenario: View job offer’s applications when there are no applications
+    Given "Java dev" offer exists
+    And I access the my offers page
+    When I click on view the offer applications
+    Then I should be on the offer's applications page
+    And the table should be empty

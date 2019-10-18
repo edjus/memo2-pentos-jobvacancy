@@ -86,3 +86,10 @@ Feature: Job Application
     When I apply with no bio
     Then I should receive a mail with offerer info
     And It should include "Bio: not specified"
+
+  @wip
+  Scenario: apply to job offer with a bio over 500 character
+    Given I access the offers list page
+    When I apply with bio "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc at porta urna. Mauris dignissim felis non neque vestibulum, a viverra orci feugiat. Interdum et malesuada fames ac ante ipsum primis in faucibus. Nullam viverra diam dui, et lacinia elit bibendum ut. Quisque id facilisis risus. Morbi et magna venenatis, aliquet magna sed, elementum ante. Phasellus orci nisl, mattis vitae arcu vel, cursus eleifend leo."
+    Then I am still in the apply page
+    And I should see "Bio too long. Max 500 characters"

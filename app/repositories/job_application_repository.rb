@@ -12,7 +12,14 @@ class JobApplicationRepository < BaseRepository
 
   protected
 
-  def load_object(a_record); end
+  def load_object(a_record)
+    applicant = JobApplicant.create_for(a_record[:applicant_email],
+                                        '')
+
+    offer = JobOfferRepository.new.find(a_record[:job_offer_id])
+
+    JobApplication.create_for(applicant, offer, nil, a_record[:applicant_bio])
+  end
 
   def changeset(application)
     {

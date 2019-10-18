@@ -50,20 +50,21 @@ JobVacancy::App.controllers :job_offers do
     else
       applicant_email = params[:job_application][:applicant_email]
       applicant_curriculum = params[:job_application][:applicant_curriculum]
-      bio = params[:job_application][:bio]
-      applicant = JobApplicant.create_for(applicant_email, applicant_curriculum, bio)
+      applicant = JobApplicant.create_for(applicant_email, applicant_curriculum)
 
-      if applicant.invalid?
-        @job_application = JobApplication.new
-        flash.now[:error] = extract_first_error applicant
-        render 'job_offers/apply'
-      else
-        @job_application = JobApplication.create_for(applicant, @job_offer, remuneration)
-        JobApplicationRepository.new.save(@job_application)
+      bio = params[:job_application][:bio]
+
+      @job_application = JobApplication.create_for(applicant, @job_offer, remuneration, bio)
+
+      if JobApplicationRepository.new.save(@job_application)
         @job_application.process
 
         flash[:success] = 'Contact information sent.'
         redirect '/job_offers'
+      else
+        flash.now[:error] = extract_first_error @job_application
+        @job_application = JobApplication.new
+        render 'job_offers/apply'
       end
     end
   end

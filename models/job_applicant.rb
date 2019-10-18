@@ -2,15 +2,12 @@ class JobApplicant
   include ActiveModel::Validations
 
   attr_accessor :email
-  attr_writer :curriculum, :bio
+  attr_writer :curriculum
 
-  validates :bio, length: { maximum: 500, message: 'Bio too long. Max 500 characters' }
-
-  def self.create_for(email, curriculum, bio = '')
+  def self.create_for(email, curriculum)
     applicant = JobApplicant.new
     applicant.email = email
     applicant.curriculum = curriculum
-    applicant.bio = bio
     applicant
   end
 
@@ -18,11 +15,5 @@ class JobApplicant
     return 'not specified' if @curriculum.nil? || @curriculum.empty?
 
     @curriculum
-  end
-
-  def bio
-    return 'not specified' if @bio.empty?
-
-    @bio
   end
 end

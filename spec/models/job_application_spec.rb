@@ -8,9 +8,10 @@ describe JobApplication do
   let(:offer) { JobOffer.new }
 
   describe 'model' do
-    it { is_expected.to respond_to(:applicant) }
-    it { is_expected.to respond_to(:job_offer) }
     it { is_expected.to respond_to(:id) }
+    it { is_expected.to respond_to(:job_offer) }
+    it { is_expected.to respond_to(:applicant) }
+    it { is_expected.to respond_to(:bio) }
   end
 
   describe 'create_for' do

@@ -3,6 +3,7 @@ class JobApplication
 
   attr_accessor :applicant, :remuneration
   attr_accessor :job_offer, :id, :updated_on, :created_on
+  attr_accessor :bio
 
   validates :applicant, :job_offer, presence: true
 

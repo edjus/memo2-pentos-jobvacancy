@@ -66,3 +66,14 @@ Feature: Job Offers CRUD
     When I click on view the offer applications
     Then I should be on the offer's applications page
     And the table should be empty
+
+  @wip
+  Scenario: View job offer’s applications when there are applications
+    Given "Java dev" offer exists
+    And the user "rob@mail.com" has applied to the offer "Java dev" with curriculum "linkedin.com/rob.profile", remuneration 30000 and bio "My name is Rob"
+    And the user "john@mail.com" has applied to the offer "Java dev" with curriculum "linkedin.com/john.profile", remuneration between 30000 and 40000 and bio "My name is John"
+    And I access the my offers page
+    When I click on view the offer applications
+    Then I should see a record with email "rob@mail.com", curriculum "linkedin.com/rob.profile", remuneration "ARS$30000" and bio "My name is Rob"
+    And I should see a record with email "john@mail.com", curriculum "linkedin.com/john.profile", remuneration "between ARS$30000 and ARS$40000" and bio "My name is John"
+

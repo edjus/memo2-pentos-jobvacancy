@@ -3,16 +3,19 @@ require 'spec_helper'
 describe JobApplicant do
   let(:email) { 'applicant@test.com' }
   let(:curriculum) { 'linkedin.com/applicant.profile' }
+  let(:bio) { 'This my bio' }
 
   describe 'model' do
     it { is_expected.to respond_to(:email) }
     it { is_expected.to respond_to(:curriculum) }
+    it { is_expected.to respond_to(:bio) }
   end
 
   describe 'create_for' do
     it 'should set email' do
-      applicant = described_class.create_for(email, curriculum)
+      applicant = described_class.create_for(email, curriculum, bio)
       expect(applicant.email).to eq(email)
+      expect(applicant.bio).to eq(bio)
     end
 
     it 'should set curriculum' do

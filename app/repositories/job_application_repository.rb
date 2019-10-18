@@ -13,6 +13,7 @@ class JobApplicationRepository < BaseRepository
   def changeset(application)
     {
       applicant_email: application.applicant.email,
+      applicant_bio: application.applicant_bio,
       job_offer_id: application.job_offer.id
     }
   end

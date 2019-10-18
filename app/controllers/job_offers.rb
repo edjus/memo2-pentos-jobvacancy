@@ -52,12 +52,21 @@ JobVacancy::App.controllers :job_offers do
       applicant_curriculum = params[:job_application][:applicant_curriculum]
       applicant = JobApplicant.create_for(applicant_email, applicant_curriculum)
 
-      @job_application = JobApplication.create_for(applicant, @job_offer, remuneration)
-      JobApplicationRepository.new.save(@job_application)
-      @job_application.process
+      applicant_bio = params[:job_application][:bio]
 
-      flash[:success] = 'Contact information sent.'
-      redirect '/job_offers'
+      @job_application = JobApplication.create_for(applicant, @job_offer,
+                                                   remuneration, applicant_bio)
+
+      if JobApplicationRepository.new.save(@job_application)
+        @job_application.process
+
+        flash[:success] = 'Contact information sent.'
+        redirect '/job_offers'
+      else
+        flash.now[:error] = extract_first_error @job_application
+        @job_application = JobApplication.new
+        render 'job_offers/apply'
+      end
     end
   end
 

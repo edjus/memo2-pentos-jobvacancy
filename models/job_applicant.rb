@@ -1,4 +1,6 @@
 class JobApplicant
+  include ActiveModel::Validations
+
   attr_accessor :email
   attr_writer :curriculum
 

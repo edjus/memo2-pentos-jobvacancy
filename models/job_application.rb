@@ -3,7 +3,7 @@ class JobApplication
 
   attr_accessor :applicant, :remuneration
   attr_accessor :job_offer, :id, :updated_on, :created_on
-  attr_accessor :bio
+  attr_writer :bio
 
   validates :applicant, :job_offer, presence: true
 
@@ -14,6 +14,12 @@ class JobApplication
     app.remuneration = remuneration_range
     app.bio = bio
     app
+  end
+
+  def bio
+    return 'not specified' if @bio.nil? || @bio.empty?
+
+    @bio
   end
 
   def process

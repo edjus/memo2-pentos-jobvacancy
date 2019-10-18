@@ -84,6 +84,6 @@ Then('the offeror receives an mail which includes {string}') do |text|
   content.include?(text).should be true
 end
 
-Then('I am still in offer list page') do
+Then('I am still in the apply page') do
   expect(page.current_path).to include('job_offers/apply/')
 end

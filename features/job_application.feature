@@ -33,25 +33,25 @@ Feature: Job Application
   Scenario: Inital value of the remuneration range is negative
     Given I access the offers list page
     When I apply with remuneration between -60000 and 60000
-    Then I am still in offer list page
+    Then I am still in the apply page
     And I should see "Invalid Range"
 
   Scenario: Both values of the remuneration range are negative
     Given I access the offers list page
     When I apply with remuneration between -30000 and -10000
-    Then I am still in offer list page
+    Then I am still in the apply page
     And I should see "Invalid Range"
 
   Scenario: End value of the remuneration range is negative
     Given I access the offers list page
     When I apply with remuneration between 30000 and -10000
-    Then I am still in offer list page
+    Then I am still in the apply page
     And I should see "Invalid Range"
 
   Scenario: Inital value is grater than end value
     Given I access the offers list page
     When I apply with remuneration between 60000 and 30000
-    Then I am still in offer list page
+    Then I am still in the apply page
     And I should see "Invalid Range"
 
   Scenario: Specific expected remuneration when applying
@@ -87,9 +87,8 @@ Feature: Job Application
     Then I should receive a mail with offerer info
     And It should include "Bio: not specified"
 
-  @wip
   Scenario: apply to job offer with a bio over 500 character
     Given I access the offers list page
-    When I apply with bio "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc at porta urna. Mauris dignissim felis non neque vestibulum, a viverra orci feugiat. Interdum et malesuada fames ac ante ipsum primis in faucibus. Nullam viverra diam dui, et lacinia elit bibendum ut. Quisque id facilisis risus. Morbi et magna venenatis, aliquet magna sed, elementum ante. Phasellus orci nisl, mattis vitae arcu vel, cursus eleifend leo."
+    When I apply with bio "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc at porta urna. Mauris dignissim felis non neque vestibulum, a viverra orci feugiat. Interdum et malesuada fames ac ante ipsum primis in faucibus. Nullam viverra diam dui, et lacinia elit bibendum ut. Quisque id facilisis risus. Morbi et magna venenatis, aliquet magna sed, elementum ante. Phasellus orci nisl, mattis vitae arcu vel, cursus eleifend leo. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc at porta urna. Mauris dignissim felis non neque vestibulum, a viverra orci feugiat. Interdum et malesuada fames ac ante ipsum primis in faucibus. Nullam viverra diam dui, et lacinia elit bibendum ut. Quisque id facilisis risus. Morbi et magna venenatis, aliquet magna sed, elementum ante. Phasellus orci nisl, mattis vitae arcu vel, cursus eleifend leo."
     Then I am still in the apply page
     And I should see "Bio too long. Max 500 characters"

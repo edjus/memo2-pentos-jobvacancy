@@ -64,6 +64,15 @@ When('I apply with remuneration between {int} and {int}') do |ini_range, end_ran
   click_button('Apply')
 end
 
+When('I apply with bio {string}') do |bio|
+  click_link 'Apply'
+  fill_in('job_application[applicant_email]', with: 'applicant@test.com')
+  fill_in('job_application[expected_remuneration_min]', with: 1)
+  fill_in('job_application[expected_remuneration_max]', with: 1)
+  fill_in('job_application[bio]', with: bio)
+  click_button('Apply')
+end
+
 Then('the offeror receives an mail which includes {string}') do |text|
   mail_store = "#{Padrino.root}/tmp/emails"
   file = File.open("#{mail_store}/offerer@test.com", 'r')

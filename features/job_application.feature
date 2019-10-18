@@ -75,7 +75,6 @@ Feature: Job Application
     And I should receive a mail with offerer info
     And It should include "Expected remuneration: up to ARS$60000"
 
-  @wip
   Scenario: apply to job offer with valid bio
     Given I access the offers list page
     When I apply with bio "This is a short bio about me! I like cooking, golf and dogs. My favorite color is #c0ffee"

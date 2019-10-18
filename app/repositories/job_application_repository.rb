@@ -18,7 +18,14 @@ class JobApplicationRepository < BaseRepository
 
     offer = JobOfferRepository.new.find(a_record[:job_offer_id])
 
-    JobApplication.create_for(applicant, offer, nil, a_record[:applicant_bio])
+    application = JobApplication.create_for(applicant,
+                                            offer,
+                                            nil,
+                                            a_record[:applicant_bio])
+
+    application.created_on = a_record[:created_on]
+
+    application
   end
 
   def changeset(application)

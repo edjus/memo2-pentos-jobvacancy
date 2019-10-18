@@ -78,6 +78,7 @@ JobVacancy::App.controllers :job_offers do
 
   get :view do
     @job_offer = JobOfferRepository.new.find(params[:offer_id])
+    @applications = JobApplicationRepository.new.find_by_offer(params[:offer_id])
 
     render 'job_offers/view'
   end

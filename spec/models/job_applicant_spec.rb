@@ -37,4 +37,13 @@ describe JobApplicant do
       expect(applicant.bio).to eq('not specified')
     end
   end
+
+  describe 'valid?' do
+    it 'should be invalid when bio is over 500 characters long' do
+      really_long_bio = 'a' * 1000
+      job_offer = described_class.create_for(email, '', really_long_bio)
+      expect(job_offer).not_to be_valid
+      expect(job_offer.errors).to have_key(:bio)
+    end
+  end
 end

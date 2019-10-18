@@ -6,6 +6,7 @@ class JobApplication
   attr_writer :bio
 
   validates :applicant, :job_offer, presence: true
+  validates :bio, length: { maximum: 500, message: 'Bio too long. Max 500 characters' }
 
   def self.create_for(applicant, offer, remuneration_range, bio = '')
     app = JobApplication.new

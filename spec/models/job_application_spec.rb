@@ -41,6 +41,15 @@ describe JobApplication do
     end
   end
 
+  describe 'valid?' do
+    it 'should be invalid when bio is over 500 characters long' do
+      really_long_bio = 'a' * 1000
+      ja = described_class.create_for(applicant, offer, rem, really_long_bio)
+      expect(ja).not_to be_valid
+      expect(ja.errors).to have_key(:bio)
+    end
+  end
+
   describe 'process' do
     it 'should deliver contact info notification' do
       ja = described_class.create_for(applicant, offer, rem)

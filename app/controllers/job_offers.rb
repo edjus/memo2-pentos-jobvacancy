@@ -50,7 +50,8 @@ JobVacancy::App.controllers :job_offers do
     else
       applicant_email = params[:job_application][:applicant_email]
       applicant_curriculum = params[:job_application][:applicant_curriculum]
-      applicant = JobApplicant.create_for(applicant_email, applicant_curriculum)
+      bio = params[:job_application][:bio]
+      applicant = JobApplicant.create_for(applicant_email, applicant_curriculum, bio)
 
       @job_application = JobApplication.create_for(applicant, @job_offer, remuneration)
       JobApplicationRepository.new.save(@job_application)

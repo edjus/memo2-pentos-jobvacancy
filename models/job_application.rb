@@ -3,24 +3,24 @@ class JobApplication
 
   attr_accessor :applicant, :remuneration
   attr_accessor :job_offer, :id, :updated_on, :created_on
-  attr_writer :bio
+  attr_writer :applicant_bio
 
   validates :applicant, :job_offer, presence: true
-  validates :bio, length: { maximum: 500, message: 'Bio too long. Max 500 characters' }
+  validates :applicant_bio, length: { maximum: 500, message: 'Bio too long. Max 500 characters' }
 
-  def self.create_for(applicant, offer, remuneration_range, bio = '')
+  def self.create_for(applicant, offer, remuneration_range, applicant_bio = '')
     app = JobApplication.new
     app.applicant = applicant
     app.job_offer = offer
     app.remuneration = remuneration_range
-    app.bio = bio
+    app.applicant_bio = applicant_bio
     app
   end
 
-  def bio
-    return 'not specified' if @bio.nil? || @bio.empty?
+  def applicant_bio
+    return 'not specified' if @applicant_bio.nil? || @applicant_bio.empty?
 
-    @bio
+    @applicant_bio
   end
 
   def process

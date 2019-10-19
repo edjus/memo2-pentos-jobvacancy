@@ -82,10 +82,12 @@ Feature: Job Offers CRUD
    When I access the my offers page
    Then the "Delete" button should be disabled
   @wip
-  Scenario: Closed offers do not show up in the available offers list
-    Given “Java dev Sr” offer exists
-    And “Java dev Jr” offer exists
-    And the “Java dev Sr” offer is closed
+  Scenario: Satisfied offers do not show up in the available offers list
+    Given "Java dev Sr" offer exists
+    And "Java dev Jr" offer exists
+    And I access the my offers page
+    And I click satisfy for "Java dev Sr"
     When I access the offer list page
-    Then I should see “Java dev Jr”
-    And I should not see “Java dev Sr”
+    Then I should see "Java dev Jr"
+    And I should not see "Java dev Sr"
+    And I should see Activate option for "Java dev Sr" in My Offers

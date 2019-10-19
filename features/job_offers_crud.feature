@@ -59,3 +59,9 @@ Feature: Job Offers CRUD
     And I should see "Java dev Sr" in My Offers
     And the offer "Java dev Sr" should have "Buenos Aires"
     And the offer "Java dev Sr" should have "Full stack Java dev"
+
+  Scenario: Delete button is disabled when the offer has applications
+   Given I have an job offer titled "Programador Java Junior", on "Buenos Aires" with description "Full-stack Java Dev"
+   And job applicant named "Juan Medina" applied for "Programador Java Junior"
+   When I access the my offers page
+   Then the "Delete" button should be disabled

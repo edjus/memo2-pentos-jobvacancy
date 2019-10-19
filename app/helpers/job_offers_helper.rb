@@ -15,4 +15,8 @@ JobVacancy::App.helpers do
     # Ex: entity.errors.messages = [:symbol, ["the error"]]
     entity.errors.messages.first[1].first
   end
+
+  def button_enabled?(offer_id)
+    applicants(offer_id).zero?
+  end
 end

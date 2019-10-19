@@ -109,3 +109,8 @@ When('the offer {string} should have {string}') do |title, value|
     page.should have_content(value)
   end
 end
+
+Then('the {string} button should be disabled') do |button_name|
+  visit '/job_offers/my'
+  expect(page).to have_button(button_name, disabled: true)
+end

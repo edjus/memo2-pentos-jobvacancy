@@ -60,6 +60,22 @@ Feature: Job Offers CRUD
     And the offer "Java dev Sr" should have "Buenos Aires"
     And the offer "Java dev Sr" should have "Full stack Java dev"
 
+  Scenario: View job offer’s applications when there are no applications
+    Given "Java dev" offer exists
+    And I access the my offers page
+    When I click on view the offer applications
+    Then I should be on the offer's applications page
+    And the table should be empty
+
+  Scenario: View job offer’s applications when there are applications
+    Given "Java dev" offer exists
+    And the user "rob@mail.com" has applied to the offer "Java dev" with curriculum "linkedin.com/rob.profile", remuneration 30000 and bio "My name is Rob"
+    And the user "john@mail.com" has applied to the offer "Java dev" with curriculum "linkedin.com/john.profile", remuneration between 30000 and 40000 and bio "My name is John"
+    And I access the my offers page
+    When I click on view the offer applications
+    Then I should see a record with email "rob@mail.com", curriculum "linkedin.com/rob.profile", remuneration "ARS$30000" and bio "My name is Rob"
+    And I should see a record with email "john@mail.com", curriculum "linkedin.com/john.profile", remuneration "between ARS$30000 and ARS$40000" and bio "My name is John"
+
   Scenario: Delete button is disabled when the offer has applications
    Given I have an job offer titled "Programador Java Junior", on "Buenos Aires" with description "Full-stack Java Dev"
    And job applicant named "Juan Medina" applied for "Programador Java Junior"

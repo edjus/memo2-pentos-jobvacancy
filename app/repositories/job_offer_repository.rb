@@ -23,6 +23,13 @@ class JobOfferRepository < BaseRepository
     load_collection dataset.where(Sequel.like(:title, "%#{title}%"))
   end
 
+  def destroy(offer)
+    applications = JobApplicationRepository.new.how_many_applicants?(offer.id)
+    raise OfferWithApplicationsError if applications.positive?
+
+    super
+  end
+
   protected
 
   def load_object(a_record)

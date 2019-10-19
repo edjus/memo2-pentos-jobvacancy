@@ -76,3 +76,8 @@ Feature: Job Offers CRUD
     Then I should see a record with email "rob@mail.com", curriculum "linkedin.com/rob.profile", remuneration "ARS$30000" and bio "My name is Rob"
     And I should see a record with email "john@mail.com", curriculum "linkedin.com/john.profile", remuneration "between ARS$30000 and ARS$40000" and bio "My name is John"
 
+  Scenario: Delete button is disabled when the offer has applications
+   Given I have an job offer titled "Programador Java Junior", on "Buenos Aires" with description "Full-stack Java Dev"
+   And job applicant named "Juan Medina" applied for "Programador Java Junior"
+   When I access the my offers page
+   Then the "Delete" button should be disabled

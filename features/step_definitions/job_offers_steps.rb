@@ -140,3 +140,7 @@ Then('I should see a record with email {string}, curriculum {string}, remunerati
   end
 end
 # rubocop:enable Metrics/LineLength, Metrics/ParameterLists
+Then('the {string} button should be disabled') do |button_name|
+  visit '/job_offers/my'
+  expect(page).to have_button(button_name, disabled: true)
+end

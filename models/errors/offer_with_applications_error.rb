@@ -1,0 +1,2 @@
+class OfferWithApplicationsError < RuntimeError
+end

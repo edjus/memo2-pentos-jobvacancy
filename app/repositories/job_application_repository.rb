@@ -14,7 +14,7 @@ class JobApplicationRepository < BaseRepository
 
   def load_object(a_record)
     applicant = JobApplicant.create_for(a_record[:applicant_email],
-                                        '')
+                                        a_record[:applicant_curriculum])
 
     offer = JobOfferRepository.new.find(a_record[:job_offer_id])
 
@@ -34,6 +34,7 @@ class JobApplicationRepository < BaseRepository
   def changeset(application)
     {
       applicant_email: application.applicant.email,
+      applicant_curriculum: application.applicant.curriculum,
       applicant_bio: application.applicant_bio,
       remuneration_min: application.remuneration.min,
       remuneration_max: application.remuneration.max,

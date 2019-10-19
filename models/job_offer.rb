@@ -35,6 +35,6 @@ class JobOffer
   end
 
   def old_offer?
-    (Date.today - updated_on) >= 30
+    (Date.today - updated_on.to_date) >= 30
   end
 end

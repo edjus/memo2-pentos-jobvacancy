@@ -130,4 +130,16 @@ JobVacancy::App.controllers :job_offers do
     end
     redirect 'job_offers/my'
   end
+
+  put :satisfy, with: :offer_id do
+    @job_offer = JobOfferRepository.new.find(params[:offer_id])
+    @job_offer.deactivate
+    if JobOfferRepository.new.save(@job_offer)
+      flash[:success] = 'Offer satisfied'
+    else
+      flash.now[:error] = 'Operation failed'
+    end
+
+    redirect '/job_offers/my'
+  end
 end

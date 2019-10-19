@@ -81,3 +81,11 @@ Feature: Job Offers CRUD
    And job applicant named "Juan Medina" applied for "Programador Java Junior"
    When I access the my offers page
    Then the "Delete" button should be disabled
+  @wip
+  Scenario: Closed offers do not show up in the available offers list
+    Given “Java dev Sr” offer exists
+    And “Java dev Jr” offer exists
+    And the “Java dev Sr” offer is closed
+    When I access the offer list page
+    Then I should see “Java dev Jr”
+    And I should not see “Java dev Sr”

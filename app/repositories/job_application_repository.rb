@@ -18,9 +18,12 @@ class JobApplicationRepository < BaseRepository
 
     offer = JobOfferRepository.new.find(a_record[:job_offer_id])
 
+    remuneration = RemunerationRange.create_for(a_record[:remuneration_min],
+                                                a_record[:remuneration_min])
+
     application = JobApplication.create_for(applicant,
                                             offer,
-                                            nil,
+                                            remuneration,
                                             a_record[:applicant_bio])
 
     application.created_on = a_record[:created_on]
@@ -32,6 +35,8 @@ class JobApplicationRepository < BaseRepository
     {
       applicant_email: application.applicant.email,
       applicant_bio: application.applicant_bio,
+      remuneration_min: application.remuneration.min,
+      remuneration_max: application.remuneration.max,
       job_offer_id: application.job_offer.id
     }
   end

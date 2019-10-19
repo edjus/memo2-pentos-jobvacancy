@@ -81,7 +81,7 @@ Feature: Job Offers CRUD
    And job applicant named "Juan Medina" applied for "Programador Java Junior"
    When I access the my offers page
    Then the "Delete" button should be disabled
-  @wip
+  
   Scenario: Satisfied offers do not show up in the available offers list
     Given "Java dev Sr" offer exists
     And "Java dev Jr" offer exists

@@ -139,8 +139,26 @@ Then('I should see a record with email {string}, curriculum {string}, remunerati
     page.should have_content(bio)
   end
 end
+
 # rubocop:enable Metrics/LineLength, Metrics/ParameterLists
 Then('the {string} button should be disabled') do |button_name|
   visit '/job_offers/my'
   expect(page).to have_button(button_name, disabled: true)
+end
+
+Given('I click satisfy for {string}') do |title|
+  within('tr', text: title) do
+    click_button('Satisfy')
+  end
+end
+
+When('I access the offer list page') do
+  visit '/job_offers/latest'
+end
+
+Then('I should see Activate option for {string} in My Offers') do |title|
+  visit '/job_offers/my'
+  within('tr', text: title) do
+    page.should have_button('Activate')
+  end
 end

@@ -67,7 +67,6 @@ Feature: Job Offers CRUD
     Then I should be on the offer's applications page
     And the table should be empty
 
-  @wip
   Scenario: View job offer’s applications when there are applications
     Given "Java dev" offer exists
     And the user "rob@mail.com" has applied to the offer "Java dev" with curriculum "linkedin.com/rob.profile", remuneration 30000 and bio "My name is Rob"

@@ -119,3 +119,24 @@ Then('the table should be empty') do
 
   expect(table_body).to have_no_content('*')
 end
+
+# rubocop:disable Metrics/LineLength, Metrics/ParameterLists
+Given('the user {string} has applied to the offer {string} with curriculum {string}, remuneration {int} and bio {string}') do |user, _offer_title, curriculum, remuneration, bio|
+  step 'I access the offers list page'
+  step "I apply with email \"#{user}\", curriculum \"#{curriculum}\", remuneration #{remuneration} and bio \"#{bio}\""
+end
+
+Given('the user {string} has applied to the offer {string} with curriculum {string}, remuneration between {int} and {int} and bio {string}') do |user, _offer_title, curriculum, remuneration_min, remuneration_max, bio|
+  step 'I access the offers list page'
+  step "I apply with email \"#{user}\", curriculum \"#{curriculum}\", remuneration between #{remuneration_min} and #{remuneration_max} and bio \"#{bio}\""
+end
+
+Then('I should see a record with email {string}, curriculum {string}, remuneration {string} and bio {string}') do |email, curriculum, remuneration, bio|
+  within('tr', text: email) do
+    page.should have_content(email)
+    page.should have_content(curriculum)
+    page.should have_content(remuneration)
+    page.should have_content(bio)
+  end
+end
+# rubocop:enable Metrics/LineLength, Metrics/ParameterLists

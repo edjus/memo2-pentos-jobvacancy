@@ -35,6 +35,7 @@ Given('job applicant named {string} applied for {string}') do |name, _job_title|
   fill_in('job_application[expected_remuneration_max]', with: 300)
   click_button('Apply')
 end
+
 When('I apply with curriculum {string}') do |curriculum|
   click_link 'Apply'
   fill_in('job_application[applicant_email]', with: 'applicant@test.com')
@@ -73,6 +74,25 @@ When('I apply with bio {string}') do |bio|
   fill_in('job_application[applicant_email]', with: 'applicant@test.com')
   fill_in('job_application[expected_remuneration_min]', with: 1)
   fill_in('job_application[expected_remuneration_max]', with: 1)
+  fill_in('job_application[bio]', with: bio)
+  click_button('Apply')
+end
+
+When('I apply with email {string}, curriculum {string}, remuneration {int} and bio {string}') do |email, curriculum, remuneration, bio|
+  click_link 'Apply'
+  fill_in('job_application[applicant_email]', with: email)
+  fill_in('job_application[applicant_curriculum]', with: curriculum)
+  fill_in('job_application[expected_remuneration_min]', with: remuneration)
+  fill_in('job_application[bio]', with: bio)
+  click_button('Apply')
+end
+
+When('I apply with email {string}, curriculum {string}, remuneration between {int} and {int} and bio {string}') do |email, curriculum, remuneration_min, remuneration_max, bio|
+  click_link 'Apply'
+  fill_in('job_application[applicant_email]', with: email)
+  fill_in('job_application[applicant_curriculum]', with: curriculum)
+  fill_in('job_application[expected_remuneration_min]', with: remuneration_min)
+  fill_in('job_application[expected_remuneration_max]', with: remuneration_max)
   fill_in('job_application[bio]', with: bio)
   click_button('Apply')
 end

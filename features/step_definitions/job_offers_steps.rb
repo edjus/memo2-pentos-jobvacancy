@@ -109,3 +109,38 @@ When('the offer {string} should have {string}') do |title, value|
     page.should have_content(value)
   end
 end
+
+When('I click on view the offer applications') do
+  click_link('View')
+end
+
+Then('the table should be empty') do
+  table_body = find('tbody')
+
+  expect(table_body).to have_no_content('*')
+end
+
+# rubocop:disable Metrics/LineLength, Metrics/ParameterLists
+Given('the user {string} has applied to the offer {string} with curriculum {string}, remuneration {int} and bio {string}') do |user, _offer_title, curriculum, remuneration, bio|
+  step 'I access the offers list page'
+  step "I apply with email \"#{user}\", curriculum \"#{curriculum}\", remuneration #{remuneration} and bio \"#{bio}\""
+end
+
+Given('the user {string} has applied to the offer {string} with curriculum {string}, remuneration between {int} and {int} and bio {string}') do |user, _offer_title, curriculum, remuneration_min, remuneration_max, bio|
+  step 'I access the offers list page'
+  step "I apply with email \"#{user}\", curriculum \"#{curriculum}\", remuneration between #{remuneration_min} and #{remuneration_max} and bio \"#{bio}\""
+end
+
+Then('I should see a record with email {string}, curriculum {string}, remuneration {string} and bio {string}') do |email, curriculum, remuneration, bio|
+  within('tr', text: email) do
+    page.should have_content(email)
+    page.should have_content(curriculum)
+    page.should have_content(remuneration)
+    page.should have_content(bio)
+  end
+end
+# rubocop:enable Metrics/LineLength, Metrics/ParameterLists
+Then('the {string} button should be disabled') do |button_name|
+  visit '/job_offers/my'
+  expect(page).to have_button(button_name, disabled: true)
+end

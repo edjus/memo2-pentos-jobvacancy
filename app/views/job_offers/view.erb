@@ -1,0 +1,39 @@
+<h3><%=@job_offer.title%></h3>
+
+<h5>Applications</h5>
+
+<table class="table table-bordered">
+	<thead>
+    <tr>
+      <th>Email</th>
+      <th>Bio</th>
+      <th>Curriculum</th>
+      <th>Expected Remuneration</th>
+      <th>Date</th>
+    </tr>
+  </thead>
+  <tbody>
+      <% @applications.each do |application| %>
+
+      <tr>
+        <td>
+          <%= application.applicant.email %>
+        </td>
+        <td>
+          <%= application.applicant_bio %>
+        </td>
+        <td>
+          <%= application.applicant.curriculum %>
+        </td>
+        <td>
+          <%= application.remuneration.range_message %>
+        </td>
+        <td>
+          <%= application.created_on.strftime('%H:%M %d/%m/%Y') %>
+        </td>
+      </tr>
+
+      <% end %>
+
+  </tbody>
+</table>

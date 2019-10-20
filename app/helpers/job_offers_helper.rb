@@ -8,4 +8,15 @@ JobVacancy::App.helpers do
   def applicants(offer_id)
     JobApplicationRepository.new.how_many_applicants?(offer_id)
   end
+
+  def extract_first_error(entity)
+    return '' if entity.errors.empty?
+
+    # Ex: entity.errors.messages = [:symbol, ["the error"]]
+    entity.errors.messages.first[1].first
+  end
+
+  def button_enabled?(offer_id)
+    applicants(offer_id).zero?
+  end
 end

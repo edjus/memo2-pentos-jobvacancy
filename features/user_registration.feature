@@ -49,3 +49,14 @@ Feature: User registration
     When I confirm the registration
     Then I am still in Registration page
     And I should see "Sorry, passwords must be alphanumeric"
+  @wip
+  Scenario: Invalid registration, email already used
+    Given a user with email "rob@mail.com" exists 
+    And I am at registration page
+    And I fill the name with "Rob"
+    And I fill the email with "rob@mail.com"
+    And I fill the password with "Gotpent0s!"
+    And I fill the password confirmation with "Gotpent0s!"
+    When I confirm the registration
+    Then I am still in Registration page
+    And I should see "Sorry, there is already an account for this email"

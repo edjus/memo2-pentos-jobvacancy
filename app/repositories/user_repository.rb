@@ -7,6 +7,12 @@ class UserRepository < BaseRepository
     load_object(row) unless row.nil?
   end
 
+  def save(user)
+    raise EmailAlreadyInUseError if find_by_email(user.email)
+
+    super
+  end
+
   protected
 
   def changeset(user)

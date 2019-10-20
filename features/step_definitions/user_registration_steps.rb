@@ -29,3 +29,12 @@ end
 Then('I am still in Registration page') do
   expect(page.current_path).to eq('/users/create')
 end
+
+Given('a user with email {string} exists') do |email|
+  step 'I am at registration page'
+  step 'I fill the name with "UserName"'
+  fill_in('user[email]', with: email)
+  step 'I fill the password with "Pasw0rd!"'
+  step 'I fill the password confirmation with "Pasw0rd!"'
+  step 'I confirm the registration'
+end

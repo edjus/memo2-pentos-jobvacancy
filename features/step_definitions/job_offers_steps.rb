@@ -162,3 +162,10 @@ Then('I should see Activate option for {string} in My Offers') do |title|
     page.should have_button('Activate')
   end
 end
+
+Given('the {string} offer is satisfied') do |title|
+  visit '/job_offers/my'
+  within('tr', text: title) do
+    click_button('Satisfy')
+  end
+end

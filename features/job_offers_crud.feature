@@ -91,3 +91,13 @@ Feature: Job Offers CRUD
     Then I should see "Java dev Jr"
     And I should not see "Java dev Sr"
     And I should see Activate option for "Java dev Sr" in My Offers
+
+  Scenario: Satisfied offers do not show up in searches
+	  Given "Java dev Sr" offer exists
+	  And "Java dev Jr" offer exists
+    And the "Java dev Sr" offer is satisfied
+    And I access the offer list page
+    And I fill the search bar with "Java"
+	  When I click search
+	  Then I should see "Java dev Jr"
+	  And I should not see "Java dev Sr"

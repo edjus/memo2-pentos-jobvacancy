@@ -40,5 +40,11 @@ describe JobApplicant do
       expect(applicant).not_to be_valid
       expect(applicant.errors).to have_key(:email)
     end
+
+    it 'should be invalid when email is only domain' do
+      applicant = described_class.create_for('@domain', '')
+      expect(applicant).not_to be_valid
+      expect(applicant.errors).to have_key(:email)
+    end
   end
 end

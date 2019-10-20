@@ -13,6 +13,12 @@ Feature: Job Offers CRUD
     Then I should see "Offer created"
     And I should see "Programmer vacancy" in My Offers
 
+  Scenario: New Offer has false in Active
+    Given I access the new offer page
+    When I fill the title with "Programmer vacancy"
+		And confirm the new offer    
+    Then I should see "false" in My Offers
+
   Scenario: Update offer
     Given I have "Programmer vacancy" offer in My Offers
     And I edit it

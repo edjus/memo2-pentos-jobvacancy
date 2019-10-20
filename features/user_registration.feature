@@ -49,7 +49,7 @@ Feature: User registration
     When I confirm the registration
     Then I am still in Registration page
     And I should see "Sorry, passwords must be alphanumeric"
-  @wip
+
   Scenario: Invalid registration, email already used
     Given a user with email "rob@mail.com" exists 
     And I am at registration page

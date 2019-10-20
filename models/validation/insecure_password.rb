@@ -1,4 +1,6 @@
-class InsecurePasswordException < StandardError
+require_relative '../errors/user_creation_exceptions.rb'
+
+class InsecurePasswordException < UserCreationExceptions
   def initialize(message)
     super(message)
   end

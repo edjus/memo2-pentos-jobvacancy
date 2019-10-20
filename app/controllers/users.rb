@@ -22,7 +22,7 @@ JobVacancy::App.controllers :users do
         flash.now[:error] = 'Passwords do not match'
         render 'users/new'
       end
-    rescue InsecurePasswordException => e
+    rescue UserCreationExceptions => e
       flash.now[:error] = "Sorry, #{e.message}"
       @user = User.new
       render 'users/new'

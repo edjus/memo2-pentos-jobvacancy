@@ -46,5 +46,11 @@ describe JobApplicant do
       expect(applicant).not_to be_valid
       expect(applicant.errors).to have_key(:email)
     end
+
+    it 'should be invalid when email contains whitespace character' do
+      applicant = described_class.create_for('nombre apellido@domain', '')
+      expect(applicant).not_to be_valid
+      expect(applicant.errors).to have_key(:email)
+    end
   end
 end

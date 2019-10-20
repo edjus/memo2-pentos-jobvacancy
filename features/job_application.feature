@@ -92,3 +92,10 @@ Feature: Job Application
     When I apply with bio "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc at porta urna. Mauris dignissim felis non neque vestibulum, a viverra orci feugiat. Interdum et malesuada fames ac ante ipsum primis in faucibus. Nullam viverra diam dui, et lacinia elit bibendum ut. Quisque id facilisis risus. Morbi et magna venenatis, aliquet magna sed, elementum ante. Phasellus orci nisl, mattis vitae arcu vel, cursus eleifend leo. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc at porta urna. Mauris dignissim felis non neque vestibulum, a viverra orci feugiat. Interdum et malesuada fames ac ante ipsum primis in faucibus. Nullam viverra diam dui, et lacinia elit bibendum ut. Quisque id facilisis risus. Morbi et magna venenatis, aliquet magna sed, elementum ante. Phasellus orci nisl, mattis vitae arcu vel, cursus eleifend leo."
     Then I am still in the apply page
     And I should see "Bio too long. Max 500 characters"
+
+  @wip
+  Scenario: Apply to job offer with email with no domain
+    Given I access the offers list page
+    When I apply with email "an.invalid.email"
+    Then I am still in offer list page
+    And I should see "Invalid email"

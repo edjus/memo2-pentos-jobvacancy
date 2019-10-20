@@ -4,7 +4,9 @@ class JobApplicant
   attr_accessor :email
   attr_writer :curriculum
 
-  validates :email, presence: true
+  VALID_EMAIL_REGEX = /\A[\w+\-.]+@[a-z\d\-]+(\.[a-z]+)*\.[a-z]+\z/i
+
+  validates :email, presence: true, format: { with: VALID_EMAIL_REGEX, message: 'Invalid email' }
 
   def self.create_for(email, curriculum)
     applicant = JobApplicant.new

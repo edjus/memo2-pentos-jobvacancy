@@ -98,3 +98,10 @@ Feature: Job Application
     When I apply with email "an.invalid.email"
     Then I am still in the apply page
     And I should see "Invalid email"
+
+  @wip
+  Scenario: Apply to job offer with email with only domain
+    Given I access the offers list page
+    When I apply with email “@mail.com”
+    Then I am still in the apply page
+    And I should see "Invalid email"

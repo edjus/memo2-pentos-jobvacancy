@@ -93,9 +93,8 @@ Feature: Job Application
     Then I am still in the apply page
     And I should see "Bio too long. Max 500 characters"
 
-  @wip
   Scenario: Apply to job offer with email with no domain
     Given I access the offers list page
     When I apply with email "an.invalid.email"
-    Then I am still in offer list page
+    Then I am still in the apply page
     And I should see "Invalid email"

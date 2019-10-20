@@ -53,6 +53,7 @@ JobVacancy::App.controllers :job_offers do
       applicant = JobApplicant.create_for(applicant_email, applicant_curriculum)
 
       if applicant.invalid?
+        @job_application = JobApplication.new
         flash.now[:error] = 'Invalid email'
         render 'job_offers/apply'
       else

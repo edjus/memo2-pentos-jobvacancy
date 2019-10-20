@@ -27,4 +27,30 @@ describe JobApplicant do
       expect(applicant.curriculum).to eq('not specified')
     end
   end
+
+  describe 'valid?' do
+    it 'should be invalid when email is blank' do
+      applicant = described_class.create_for('', '')
+      expect(applicant).not_to be_valid
+      expect(applicant.errors).to have_key(:email)
+    end
+
+    it 'should be invalid when email do not have domain' do
+      applicant = described_class.create_for('email.with.no.domain', '')
+      expect(applicant).not_to be_valid
+      expect(applicant.errors).to have_key(:email)
+    end
+
+    it 'should be invalid when email is only domain' do
+      applicant = described_class.create_for('@domain', '')
+      expect(applicant).not_to be_valid
+      expect(applicant.errors).to have_key(:email)
+    end
+
+    it 'should be invalid when email contains whitespace character' do
+      applicant = described_class.create_for('nombre apellido@domain', '')
+      expect(applicant).not_to be_valid
+      expect(applicant.errors).to have_key(:email)
+    end
+  end
 end

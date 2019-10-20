@@ -19,4 +19,16 @@ JobVacancy::App.helpers do
   def button_enabled?(offer_id)
     applicants(offer_id).zero?
   end
+
+  def build_job_application_from_params(params)
+    applicant = JobApplicant.create_for(params[:applicant_email],
+                                        params[:applicant_curriculum])
+    raise InvalidEmailApplicantError if applicant.invalid?
+
+    remuneration = RemunerationRange.create_for(params[:expected_remuneration_min],
+                                                params[:expected_remuneration_max])
+    raise InvalidRemunerationRangeError if remuneration.invalid?
+
+    JobApplication.create_for(applicant, @job_offer, remuneration, params[:bio])
+  end
 end

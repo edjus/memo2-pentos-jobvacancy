@@ -39,23 +39,9 @@ JobVacancy::App.controllers :job_offers do
 
   post :apply, with: :offer_id do
     @job_offer = JobOfferRepository.new.find(params[:offer_id])
-    min_range = params[:job_application][:expected_remuneration_min]
-    max_range = params[:job_application][:expected_remuneration_max]
-    remuneration = RemunerationRange.create_for(min_range, max_range)
 
-    if remuneration.invalid?
-      @job_application = JobApplication.new
-      flash.now[:error] = 'Invalid Range'
-      render 'job_offers/apply'
-    else
-      applicant_email = params[:job_application][:applicant_email]
-      applicant_curriculum = params[:job_application][:applicant_curriculum]
-      applicant = JobApplicant.create_for(applicant_email, applicant_curriculum)
-
-      applicant_bio = params[:job_application][:bio]
-
-      @job_application = JobApplication.create_for(applicant, @job_offer,
-                                                   remuneration, applicant_bio)
+    begin
+      @job_application = build_job_application_from_params params[:job_application]
 
       if JobApplicationRepository.new.save(@job_application)
         @job_application.process
@@ -67,6 +53,10 @@ JobVacancy::App.controllers :job_offers do
         @job_application = JobApplication.new
         render 'job_offers/apply'
       end
+    rescue ApplicationCreationExceptions => e
+      @job_application = JobApplication.new
+      flash.now[:error] = e.message
+      render 'job_offers/apply'
     end
   end
 

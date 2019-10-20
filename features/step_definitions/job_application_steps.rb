@@ -30,7 +30,7 @@ end
 Given('job applicant named {string} applied for {string}') do |name, _job_title|
   visit '/job_offers/latest'
   click_link 'Apply'
-  fill_in('job_application[applicant_email]', with: name + '@test.com')
+  fill_in('job_application[applicant_email]', with: name.delete(' ') + '@test.com')
   fill_in('job_application[expected_remuneration_min]', with: 200)
   fill_in('job_application[expected_remuneration_max]', with: 300)
   click_button('Apply')
@@ -106,4 +106,12 @@ end
 
 Then('I am still in the apply page') do
   expect(page.current_path).to include('job_offers/apply/')
+end
+
+When('I apply with email {string}') do |email|
+  click_link 'Apply'
+  fill_in('job_application[applicant_email]', with: email)
+  fill_in('job_application[expected_remuneration_min]', with: 1)
+  fill_in('job_application[expected_remuneration_max]', with: 1)
+  click_button('Apply')
 end

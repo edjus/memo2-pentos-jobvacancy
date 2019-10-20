@@ -4,6 +4,8 @@ class JobApplicant
   attr_accessor :email
   attr_writer :curriculum
 
+  validates :email, presence: true
+
   def self.create_for(email, curriculum)
     applicant = JobApplicant.new
     applicant.email = email

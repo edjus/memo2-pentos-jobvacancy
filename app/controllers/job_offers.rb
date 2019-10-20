@@ -37,7 +37,7 @@ JobVacancy::App.controllers :job_offers do
     render 'job_offers/list'
   end
 
-  post :apply, with: :offer_id do
+  post :apply, with: :offer_id do # rubocop:disable Metrics/BlockLength
     @job_offer = JobOfferRepository.new.find(params[:offer_id])
     min_range = params[:job_application][:expected_remuneration_min]
     max_range = params[:job_application][:expected_remuneration_max]
@@ -52,20 +52,25 @@ JobVacancy::App.controllers :job_offers do
       applicant_curriculum = params[:job_application][:applicant_curriculum]
       applicant = JobApplicant.create_for(applicant_email, applicant_curriculum)
 
-      applicant_bio = params[:job_application][:bio]
-
-      @job_application = JobApplication.create_for(applicant, @job_offer,
-                                                   remuneration, applicant_bio)
-
-      if JobApplicationRepository.new.save(@job_application)
-        @job_application.process
-
-        flash[:success] = 'Contact information sent.'
-        redirect '/job_offers'
-      else
-        flash.now[:error] = extract_first_error @job_application
-        @job_application = JobApplication.new
+      if applicant.invalid?
+        flash.now[:error] = 'Invalid email'
         render 'job_offers/apply'
+      else
+        applicant_bio = params[:job_application][:bio]
+
+        @job_application = JobApplication.create_for(applicant, @job_offer,
+                                                     remuneration, applicant_bio)
+
+        if JobApplicationRepository.new.save(@job_application)
+          @job_application.process
+
+          flash[:success] = 'Contact information sent.'
+          redirect '/job_offers'
+        else
+          flash.now[:error] = extract_first_error @job_application
+          @job_application = JobApplication.new
+          render 'job_offers/apply'
+        end
       end
     end
   end

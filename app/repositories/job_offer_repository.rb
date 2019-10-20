@@ -20,7 +20,7 @@ class JobOfferRepository < BaseRepository
   end
 
   def search_by_title(title)
-    load_collection dataset.where(Sequel.like(:title, "%#{title}%"))
+    load_collection dataset.where(Sequel.like(:title, "%#{title}%")).where(is_active: true)
   end
 
   def destroy(offer)

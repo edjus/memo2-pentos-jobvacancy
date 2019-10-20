@@ -27,4 +27,12 @@ describe JobOffer do
       expect(job_offer).to be_valid
     end
   end
+
+  describe 'is_active?' do
+    it 'should not be active when deactivate the offer' do
+      job_offer = described_class.new(title: 'a title', is_active: true)
+      job_offer.deactivate
+      expect(job_offer.is_active).to be false
+    end
+  end
 end
